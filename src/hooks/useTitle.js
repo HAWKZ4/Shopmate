@@ -1,12 +1,10 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 
 export const useTitle = (title) => {
 
   useEffect(() => {
-    document.title = `${title} | Shopmate`
-  }, [title])
+    document.title = `${title} | Shopping Cart`
+  }, [title]);
 
-  return (
-    null
-  )
+  return null;
 }

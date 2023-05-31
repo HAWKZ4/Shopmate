@@ -1,38 +1,36 @@
 import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
-import "./ProductCard.css"
-
+import "./ProductCard.css";
 
 export const ProductCard = ({ product }) => {
-    const { id, name, image, price } = product;
+  const { name, price, image, id } = product;
 
-    const { cartList, addToCart, removeFromCart } = useCart()
+  const { cartList, addToCart, removeFromCart } = useCart()
 
-    const [itemFound, setItemFound] = useState(false)
+  const [inTheCart, setInTheCart] = useState(false)
 
-    useEffect(() => {
-        const cartItemFound = cartList.find(cartItem => cartItem.id === id);
+  useEffect(() => {
+    const isItInCartlist = cartList.find(cartItem => cartItem.id === id)
 
-        if (cartItemFound) {
-            setItemFound(true)
-        } else {
-            setItemFound(false)
-        }
+    if (isItInCartlist) {
+      setInTheCart(true)
+    } else {
+      setInTheCart(false)
+    }
 
-    }, [cartList, id])
+  }, [cartList, id])
 
 
-    return (
-        <div className="product">
-            <img src={image} alt={name} />
-            <div className="name">
-                <p>{name}</p>
-            </div>
-            <div className="action">
-                <span>${price}</span>
-                {itemFound ? (<button className="remove" onClick={() => removeFromCart(product)}>Remove</button>) : (<button onClick={() => addToCart(product)}>Add To Cart</button>)}
+  return (
+    <div className="productCard">
+      <img src={image} alt={name} />
+      <p className="name">{name}</p>
+      <div className="action">
+        <p>${price}</p>
 
-            </div>
-        </div>
-    )
+        {inTheCart ? (<button className="remove" onClick={() => removeFromCart(product)}>Remove</button>) : (<button onClick={() => addToCart(product)}>Add To Cart</button>)}
+
+      </div>
+    </div >
+  )
 }
