@@ -1,7 +1,10 @@
+import { useCart } from "../context/CartContext";
 import "./CartCard.css"
 
 export const CartCard = ({ product }) => {
     const { name, image, price } = product;
+
+    const { removeFromCart } = useCart()
     return (
         <div className="cartCard">
             <img src={image} alt={name} />
@@ -11,9 +14,7 @@ export const CartCard = ({ product }) => {
             <div className="productPrice">
                 ${price}
             </div>
-            <button>
-                Remove
-            </button>
+            <button onClick={() => removeFromCart(product)}>Remove</button>
 
         </div>
     )
